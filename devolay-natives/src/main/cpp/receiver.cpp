@@ -35,7 +35,7 @@ JNIEXPORT jlong JNICALL Java_me_walkerknapp_devolay_DevolayReceiver_receiveCreat
 }
 
 JNIEXPORT void JNICALL Java_me_walkerknapp_devolay_DevolayReceiver_receiveDestroy(JNIEnv *env, jclass jClazz, jlong pReceiver) {
-    delete reinterpret_cast<NDIlib_recv_instance_t>(pReceiver);
+    getNDILib()->recv_destroy(reinterpret_cast<NDIlib_recv_instance_t>(pReceiver));
 }
 
 JNIEXPORT void JNICALL Java_me_walkerknapp_devolay_DevolayReceiver_receiveConnect(JNIEnv *env, jclass jClazz, jlong pReceiver, jlong pSource) {
