@@ -28,16 +28,16 @@ open class ToolchainConfiguration : RuleSource() {
                 target("linux_x86")
 
                 target("windows_x86-64") {
-                    getcCompiler().executable = "x86_64-w64-mingw32-gcc"
-                    cppCompiler.executable = "x86_64-w64-mingw32-g++"
-                    linker.executable = "x86_64-w64-mingw32-g++"
+                    getcCompiler().executable = "x86_64-w64-mingw32-g++-faker"
+                    cppCompiler.executable = "x86_64-w64-mingw32-g++-faker"
+                    linker.executable = "x86_64-w64-mingw32-g++-faker"
                     staticLibArchiver.executable = "x86_64-w64-mingw32-ar"
                 }
 
                 target("windows_x86") {
-                    getcCompiler().executable = "i686-w64-mingw32-gcc"
-                    cppCompiler.executable = "i686-w64-mingw32-g++"
-                    linker.executable = "i686-w64-mingw32-g++"
+                    getcCompiler().executable = "i686-w64-mingw32-g++-faker"
+                    cppCompiler.executable = "i686-w64-mingw32-g++-faker"
+                    linker.executable = "i686-w64-mingw32-g++-faker"
                     staticLibArchiver.executable = "i686-w64-mingw32-ar"
                 }
             }
@@ -86,7 +86,8 @@ open class ToolchainConfiguration : RuleSource() {
 
         val androidNdk = locateAndroidNdk()
         if (androidNdk != null) {
-            val extraIncludes = androidNdk.parent.parent.parent.parent.parent.resolve("sysroot").resolve("usr").resolve("include")
+            //val extraIncludes = androidNdk.parent.parent.parent.parent.parent.resolve("sysroot").resolve("usr").resolve("include")
+            val extraIncludes = androidNdk.parent.resolve("sysroot").resolve("usr").resolve("include")
 
             register<Clang>("androidNdk") {
                 target("android_armv7a") { this as org.gradle.nativeplatform.toolchain.internal.gcc.DefaultGccPlatformToolChain
@@ -106,16 +107,16 @@ open class ToolchainConfiguration : RuleSource() {
                     }
 
 
-                    getcCompiler().executable = "clang"
+                    getcCompiler().executable = "clang-14"
                     getcCompiler().withArguments(configureArguments)
-                    cppCompiler.executable = "clang++"
+                    cppCompiler.executable = "clang-14"
                     cppCompiler.withArguments(configureArguments)
-                    linker.executable = "clang++"
-                    linker.withArguments (configureArguments)
+                    linker.executable = "clang-14"
+                    linker.withArguments(configureArguments)
 
-                    symbolExtractor.executable = "arm-linux-androideabi-objcopy"
-                    staticLibArchiver.executable = "arm-linux-androideabi-ar"
-                    stripper.executable = "arm-linux-androideabi-strip"
+                    symbolExtractor.executable = "llvm-objcopy"
+                    staticLibArchiver.executable = "llvm-ar"
+                    stripper.executable = "llvm-strip"
                 }
 
                 target("android_arm64-v8a") {
@@ -137,16 +138,16 @@ open class ToolchainConfiguration : RuleSource() {
                     }
 
 
-                    getcCompiler().executable = "clang"
+                    getcCompiler().executable = "clang-14"
                     getcCompiler().withArguments(configureArguments)
-                    cppCompiler.executable = "clang++"
+                    cppCompiler.executable = "clang-14"
                     cppCompiler.withArguments(configureArguments)
-                    linker.executable = "clang++"
-                    linker.withArguments (configureArguments)
+                    linker.executable = "clang-14"
+                    linker.withArguments(configureArguments)
 
-                    symbolExtractor.executable = "aarch64-linux-android-objcopy"
-                    staticLibArchiver.executable = "aarch64-linux-android-ar"
-                    stripper.executable = "aarch64-linux-android-strip"
+                    symbolExtractor.executable = "llvm-objcopy"
+                    staticLibArchiver.executable = "llvm-ar"
+                    stripper.executable = "llvm-strip"
                 }
 
                 target("android_x86") {
@@ -167,16 +168,16 @@ open class ToolchainConfiguration : RuleSource() {
                     }
 
 
-                    getcCompiler().executable = "clang"
+                    getcCompiler().executable = "clang-14"
                     getcCompiler().withArguments(configureArguments)
-                    cppCompiler.executable = "clang++"
+                    cppCompiler.executable = "clang-14"
                     cppCompiler.withArguments(configureArguments)
-                    linker.executable = "clang++"
-                    linker.withArguments (configureArguments)
+                    linker.executable = "clang-14"
+                    linker.withArguments(configureArguments)
 
-                    symbolExtractor.executable = "i686-linux-android-objcopy"
-                    staticLibArchiver.executable = "i686-linux-android-ar"
-                    stripper.executable = "i686-linux-android-strip"
+                    symbolExtractor.executable = "llvm-objcopy"
+                    staticLibArchiver.executable = "llvm-ar"
+                    stripper.executable = "llvm-strip"
                 }
 
                 target("android_x86-64") {
@@ -197,16 +198,16 @@ open class ToolchainConfiguration : RuleSource() {
                     }
 
 
-                    getcCompiler().executable = "clang"
+                    getcCompiler().executable = "clang-14"
                     getcCompiler().withArguments(configureArguments)
-                    cppCompiler.executable = "clang++"
+                    cppCompiler.executable = "clang-14"
                     cppCompiler.withArguments(configureArguments)
-                    linker.executable = "clang++"
-                    linker.withArguments (configureArguments)
+                    linker.executable = "clang-14"
+                    linker.withArguments(configureArguments)
 
-                    symbolExtractor.executable = "x86_64-linux-android-objcopy"
-                    staticLibArchiver.executable = "x86_64-linux-android-ar"
-                    stripper.executable = "x86_64-linux-android-strip"
+                    symbolExtractor.executable = "llvm-objcopy"
+                    staticLibArchiver.executable = "llvm-ar"
+                    stripper.executable = "llvm-strip"
                 }
             }
         }

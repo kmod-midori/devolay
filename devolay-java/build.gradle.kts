@@ -88,6 +88,9 @@ val androidAar by tasks.registering(Zip::class) {
         rename { "classes.jar" }
     }
     from(generateAndroidManifest)
+
+    archiveExtension.set("aar")
+    destinationDirectory.set(layout.buildDirectory.dir("libs"))
 }
 
 // Define our publications
